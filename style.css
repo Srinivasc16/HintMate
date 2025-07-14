@@ -1,0 +1,32 @@
+body {
+  font-family: sans-serif;
+  padding: 10px;
+  width: 300px;
+}
+
+button.hint-button {
+  display: block;
+  margin-top: 10px;
+  background-color: #5c6bc0;
+  color: white;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.hint-text {
+  margin: 5px 0 15px;
+  padding: 8px;
+  background: #f5f5f5;
+  border-radius: 5px;
+  display: none;
+}
+
+.hint-text:not(.hidden) {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}

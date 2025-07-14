@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "HintMate",
+  "version": "1.0",
+  "description": "Get AI-generated hints for LeetCode, Codeforces, hackerrank, and more.",
+  "permissions": ["tabs", "scripting"],
+  "host_permissions": [
+    "https://leetcode.com/*",
+    "https://www.codechef.com/*",
+    "https://codeforces.com/*",
+    "https://www.hackerrank.com/*",
+    "https://atcoder.jp/*",
+    "https://www.topcoder.com/*",
+    "https://practice.geeksforgeeks.org/*",
+    "https://openrouter.ai/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icons/logo_zoomed.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://leetcode.com/problems/*",
+        "https://www.codechef.com/practice/**",
+        "https://codeforces.com/problemset/problem/*",
+        "https://www.hackerrank.com/challenges/*/*",
+        "https://www.topcoder.com/challenges/*",
+        "https://practice.geeksforgeeks.org/problems/*",
+        "https://www.geeksforgeeks.org/problems/*/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
