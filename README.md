@@ -4,7 +4,8 @@ HintMate is a lightweight, open-source Chrome extension that provides AI-generat
 - LeetCode
 - Codeforces
 - HackerRank
-- More platforms coming very soon
+- Codechef
+- GeeksforGeeks
 This tool is designed to assist learners and coders in approaching problems with guidance, without giving away full solutions.
 
 ---
@@ -41,6 +42,7 @@ The extension should now appear in your extensions bar.
 - [Codeforces](https://codeforces.com)
 - [CodeChef (Practice only)](https://www.codechef.com/practice)
 - [HackerRank](https://www.hackerrank.com)
+- [GeeksforGeeks](https://www.geeksforgeeks.org/)
 
 ---
 
