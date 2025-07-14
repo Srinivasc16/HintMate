@@ -6,6 +6,7 @@ HintMate is a lightweight, open-source Chrome extension that provides AI-generat
 - HackerRank
 - Codechef
 - GeeksforGeeks
+
 This tool is designed to assist learners and coders in approaching problems with guidance, without giving away full solutions.
 
 ---
