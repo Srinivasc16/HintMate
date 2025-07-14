@@ -1,15 +1,10 @@
 # HintMate - Competitive Programming Helper Extension
 
 HintMate is a lightweight, open-source Chrome extension that provides AI-generated hints for competitive programming problems across major platforms such as:
-
 - LeetCode
 - Codeforces
-- CodeChef (Practice problems only)
 - HackerRank
-- GeeksforGeeks
-- TopCoder
-- AtCoder (coming soon)
-
+- More platforms coming very soon
 This tool is designed to assist learners and coders in approaching problems with guidance, without giving away full solutions.
 
 ---
