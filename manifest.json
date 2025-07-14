@@ -16,7 +16,7 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_icon": "icons/logo_zoomed.png"
+    "default_icon": "logo.png"
   },
   "content_scripts": [
     {

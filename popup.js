@@ -1,29 +1,33 @@
-
 document.addEventListener("DOMContentLoaded", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   chrome.tabs.sendMessage(tab.id, { type: "GET_QUESTION" }, async (res) => {
     const titleEl = document.getElementById("title");
     const container = document.getElementById("hints-container");
+    const loadingEl = document.getElementById("loading");
 
     if (!res || !res.question || res.question.trim().length < 50) {
-  titleEl.textContent = "Supported in competitive Platforms like LeetCode, Codeforces, HackerRank and Soon all platforms will be available And if you are on correct page then try to refresh and click on the extension";
-  
-  // Remove loading spinner if it's there
-// Remove loading spinner after hints are loaded
-const loadingEl = document.getElementById("loading");
-if (loadingEl) loadingEl.remove();
+      titleEl.textContent = "Once refresh and try once again -- Supported on LeetCode, Codeforces, HackerRank, etc. If you're on a problem page, try refreshing.";
+      if (loadingEl) loadingEl.remove();
+      return;
+    }
 
-  
-  return;
-}
+    const questionText = res.question.trim();
+    console.log("📘 Extracted Question:", questionText);
 
     titleEl.textContent = "Fetching Hints...";
 
     try {
-      const hints = await fetchHints(res.question);
+      const hints = await fetchHints(questionText);
+      if (loadingEl) loadingEl.remove();
+
+      if (!hints.length) {
+        titleEl.textContent = "No hints returned.";
+        return;
+      }
 
       titleEl.textContent = "Click to reveal hints:";
+
       hints.forEach((hint, i) => {
         const btn = document.createElement("button");
         btn.className = "hint-button";
@@ -38,51 +42,37 @@ if (loadingEl) loadingEl.remove();
         container.appendChild(btn);
         container.appendChild(div);
       });
-    } catch (e) {
+    } catch (error) {
       titleEl.textContent = "Failed to load hints.";
-      console.error(e);
+      if (loadingEl) loadingEl.remove();
+      console.error("❌ Error fetching hints:", error);
     }
   });
 });
 
 async function fetchHints(questionText) {
-  const apiKey = "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"; // Replace with valid OpenRouter key
+  console.log("🚀 Sending to backend:", questionText);
 
-  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${apiKey}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      model: "mistralai/mistral-7b-instruct:free",
-      messages: [
-        {
-          role: "system",
-          content: "You are a helpful assistant giving programming hints."
-        },
-        {
-          role: "user",
-          content: `Provide 5 insightful, concise hints that gently guide the user toward solving the problem without revealing the solution. Do not label them as "hints" or number them. Each hint should be a single, complete sentence that encourages problem-solving intuition, such as referencing useful patterns, data structures, or algorithms (e.g., "Consider how you might use a stack here"). Avoid vague process suggestions—make each line actionable, technical, and helpful, yet indirect.\n\nProblem:\n\n${questionText}`
-        }
-      ],
-      max_tokens: 300
-    })
-  });
+  try {
+    const response = await fetch("https://backx-7awm.onrender.com/get-hints", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ question: questionText })
+    });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error("❌ Failed API response:", errorText);
-    console.log(errorText);
-    throw new Error("API error: " + response.status);
+    const resultText = await response.text();
+    console.log("📩 Backend response:", resultText);
+
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
+
+    const result = JSON.parse(resultText);
+    return Array.isArray(result.hints) ? result.hints : [];
+  } catch (error) {
+    console.error("❌ Failed to fetch hints:", error);
+    return [];
   }
-
-  const data = await response.json();
-  console.log("✅ API Response:", data);
-
-  const content = data.choices?.[0]?.message?.content || "No hints found.";
-  return content
-    .split("\n")
-    .filter(line => line.trim() && !line.trim().startsWith("Answer"))
-    .slice(0, 5);
 }
