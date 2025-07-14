@@ -13,7 +13,7 @@ This tool is designed to assist learners and coders in approaching problems with
 
 Until the extension is available on the Chrome Web Store, follow these steps to use it in Developer Mode:
 
-1. Clone this repository or [download the ZIP](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME/archive/refs/heads/main.zip)
+1. Clone this repository or [download the ZIP](https://github.com/Srinivasc16/HintMate/archive/refs/heads/main.zip)
 2. Extract the ZIP to a local folder
 3. Open Google Chrome and navigate to:  
    `chrome://extensions`
