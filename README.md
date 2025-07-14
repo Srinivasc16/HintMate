@@ -41,17 +41,14 @@ The extension should now appear in your extensions bar.
 - [Codeforces](https://codeforces.com)
 - [CodeChef (Practice only)](https://www.codechef.com/practice)
 - [HackerRank](https://www.hackerrank.com)
-- [GeeksforGeeks](https://practice.geeksforgeeks.org)
-- [TopCoder](https://www.topcoder.com)
-- [AtCoder](https://atcoder.jp) (Planned support)
 
 ---
 
 ## How to Use
 
 1. Open a supported problem on one of the listed platforms
-2. Click on the **HintMate** icon in the Chrome toolbar
-3. Hints will be generated and shown in the popup interface
+2. Click on the **HintMate** icon in the Chrome toolbar 
+3. Hints will be generated and shown in the popup interface With in 5 seconds
 4. Click each button to reveal hints step-by-step
 
 If no hints appear, make sure you are on a supported problem page and try refreshing the page.
